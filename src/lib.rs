@@ -132,22 +132,3 @@ unsafe fn plugin_api_hook(
     }
 }
 
-if let Some(json) = json_value_from_bw(json) {
-    log::debug!("LOBBY MESSAGE {}", json.pretty(2));
-
-    if json["data"]["endpoint"] == "RequestRaceChange" {
-        let inner_data = &json["data"]["data"];
-        let id = inner_data["id"].as_u32().unwrap_or(0);
-        let race_id = inner_data["selected_race"].as_u32().unwrap_or(0);
-
-        let players = samase::players();
-        if !players.is_null() {
-            let player_ptr = unsafe { players.add(id as usize) };
-            unsafe {
-                (*player_ptr).race = race_id as u8;
-            }
-
-            log::info!("Set player {} race to {}", id, race_id);
-        }
-    }
-}
