@@ -1,0 +1,17 @@
+[package]
+name = "lobbywebuipluginthing"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+name = "lobbywebuipluginthing"
+crate-type = ["cdylib"]
+
+[dependencies]
+log = "0.4"
+fern = "0.6"
+json = "0.12"
+
+[dependencies.samase_plugin]
+git = "https://github.com/neivv/samase_plugin"
+rev = "9a73bcccba8eb330371554065b5c559f1552bb3d"
