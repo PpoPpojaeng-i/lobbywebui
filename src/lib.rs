@@ -46,7 +46,7 @@ pub mod bw {
         pub value: u16,
     }
 }
-mod selected_race;
+pub mod sr;
 
 unsafe fn json_value_from_bw(bw: *mut bw::JsonValue) -> Option<JsonValue> {
     match (*bw).type_flags.value & 0x7 {
