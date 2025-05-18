@@ -5,7 +5,8 @@ use std::ffi::c_void;
 use json::JsonValue;
 use samase_plugin::{FuncId, PluginApi};
 
-mod bw {
+
+pub mod bw {
     #[repr(C)]
     #[derive(Copy, Clone)]
     pub union JsonValue {
@@ -45,6 +46,7 @@ mod bw {
         pub value: u16,
     }
 }
+mod selected_race;
 
 unsafe fn json_value_from_bw(bw: *mut bw::JsonValue) -> Option<JsonValue> {
     match (*bw).type_flags.value & 0x7 {
@@ -90,6 +92,8 @@ unsafe fn json_value_from_bw(bw: *mut bw::JsonValue) -> Option<JsonValue> {
     }
 }
 
+
+
 #[unsafe(no_mangle)]
 pub unsafe extern "C" fn samase_plugin_init(api: *const PluginApi) {
     let _ = fern::Dispatch::new()
@@ -131,4 +135,6 @@ unsafe fn plugin_api_hook(
         panic!("Failed to hook func {func:?}");
     }
 }
+
+
 
