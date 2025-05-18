@@ -1,12 +1,12 @@
 use crate::json_value_from_bw;
 use json::JsonValue;
 
+#[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct RequestRaceChange {
     pub id: u32,
     pub selected_race: u8,
 }
-
 
 pub fn parse_race_change(ptr: *mut crate::bw::JsonValue) -> Option<RequestRaceChange> {
     let json: JsonValue = unsafe { json_value_from_bw(ptr)? };
