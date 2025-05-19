@@ -1,6 +1,7 @@
 use crate::json_value_from_bw;
 use json::JsonValue;
 
+#[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct RequestRaceChange {
     pub id: u32,
